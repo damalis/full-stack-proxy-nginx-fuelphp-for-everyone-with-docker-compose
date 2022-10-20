@@ -1,0 +1,12 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+    RewriteRule ^$ /webapp/public/ [L]
+    RedirectMatch 301 ^/assets/(.*)$ /webapp/public/assets/$1
+
+    # Send request to the subfolder, if it's not a real file, folder or it's a root request
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d [OR]
+    RewriteCond $1 ^$
+
+    #RewriteRule ^(.*)$ /deep/sub/folder [R=301,L]
+</IfModule>
