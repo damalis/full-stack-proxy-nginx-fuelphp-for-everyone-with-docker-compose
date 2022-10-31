@@ -36,7 +36,7 @@ services:
             - 'docker-volume-backup.stop-during-backup=true'
         command: > 
             bash -c "apt-get -y update && apt-get install -y zip unzip && docker-php-ext-install mysqli && docker-php-ext-enable mysqli; curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer && 
-            composer create-project fuel/fuel webapp --prefer-dist --no-install && composer config --working-dir=${WEBSERVER_DOC_ROOT}/webapp allow-plugins.composer/installers true && composer install --working-dir=${WEBSERVER_DOC_ROOT}/webapp && cd ${WEBSERVER_DOC_ROOT}/webapp && php oil refine install; 
+            if [ -f \"${WEBSERVER_DOC_ROOT}/webapp/oil\" ]; then composer update --working-dir=${WEBSERVER_DOC_ROOT}/webapp; else composer create-project fuel/fuel webapp --prefer-dist --no-install && composer config --working-dir=${WEBSERVER_DOC_ROOT}/webapp allow-plugins.composer/installers true && composer install --working-dir=${WEBSERVER_DOC_ROOT}/webapp && cd ${WEBSERVER_DOC_ROOT}/webapp && php oil refine install; fi; 
             grep -qe 'date.timezone = ${LOCAL_TIMEZONE}' ${PHP_INI_DIR_PREFIX}/php/conf.d/security.ini || echo 'date.timezone = ${LOCAL_TIMEZONE}' >> ${PHP_INI_DIR_PREFIX}/php/conf.d/security.ini; php-fpm"
 
     webserver:
