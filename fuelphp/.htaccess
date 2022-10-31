@@ -7,6 +7,6 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d [OR]
     RewriteCond $1 ^$
-
-    #RewriteRule ^(.*)$ /deep/sub/folder [R=301,L]
+	
+	#SetEnv FUEL_ENV production
 </IfModule>
