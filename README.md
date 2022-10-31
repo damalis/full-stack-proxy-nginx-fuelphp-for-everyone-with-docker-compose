@@ -38,6 +38,14 @@ Create rules to open ports to the internet, or to a specific IPv4 address or ran
 - [Manual Configuration and Installation](#manual)
 - [Portainer Installation](#portainer)
 - [Usage](#usage)
+	- [Website](#website)
+	- [Proxy](#proxy)
+	- [Webserver](#webserver)
+	- [Database](#database)
+	- [Redis](#redis)
+	- [Cache](#cache)
+	- [phpMyAdmin](#phpmyadmin)
+	- [backup](#backup)					  
 
 ## Automatic
 
@@ -209,21 +217,17 @@ You should see the "Welcome! You have successfully installed the Fuel PHP Framew
 https://example.com
 ```
 
-add or remove code in the ```./php-fpm/php/conf.d/security.ini``` file for custom php.ini configurations
+add or remove code in the ./php-fpm/php/conf.d/security.ini file for custom php.ini configurations
 
 [https://www.php.net/manual/en/configuration.file.php](https://www.php.net/manual/en/configuration.file.php)
 
-add or remove code in the ```./php-fpm/php-fpm.d/z-www.conf``` file for php-fpm configurations
+You should make changes custom host configurations ```./php-fpm/php-fpm.d/z-www.conf``` then must restart service, FPM uses php.ini syntax for its configuration file - php-fpm.conf, and pool configuration files.
 
-Or you should make changes custom host configurations then must restart service
+[https://www.php.net/manual/en/install.fpm.configuration.php](https://www.php.net/manual/en/install.fpm.configuration.php)
 
 ```
 docker container restart fuelphp
 ```
-
-FPM uses php.ini syntax for its configuration file - php-fpm.conf, and pool configuration files.
-
-[https://www.php.net/manual/en/install.fpm.configuration.php](https://www.php.net/manual/en/install.fpm.configuration.php)
 
 add and/or remove fuelphp site folders and files with any ftp client program in ```./fuelphp/webapp``` folder.
 <br />You can also visit `https://example.com` to access website after starting the containers.
@@ -232,13 +236,15 @@ add and/or remove fuelphp site folders and files with any ftp client program in 
 
 Proxying is typically used to distribute the load among several servers, seamlessly show content from different websites, or pass requests for processing to application servers over protocols other than HTTP.
 
+add or remove code in the ```./proxy/templates/proxy.conf.template``` file for custom proxy configurations
+
 [https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/](https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/)
 
 #### Webserver
 
 add or remove code in the ```./webserver/extra/httpd-vhosts.conf``` file for custom apache2/httpd configurations
 
-[https://httpd.apache.org/docs/2.4/en/configuring.html](https://httpd.apache.org/docs/2.4/en/configuring.html)
+[https://httpd.apache.org/docs/2.4/](https://httpd.apache.org/docs/2.4/)
 
 #### Database
 
@@ -268,7 +274,7 @@ add or remove code in the ```./webserver/extra/httpd-vhosts.conf``` file for cus
 
 [https://mariadb.com/kb/en/configuring-mariadb-with-option-files/](https://mariadb.com/kb/en/configuring-mariadb-with-option-files/)
 
-#### Redis and Cache
+#### Redis
 
 For every Redis database connection there must be a config in redis array in ```./fuelphp/webapp/fuel/app/config/<environment>/db.php```.
 Configuration options and explanation are listed below. Every config requires to contain a hostname and a port.
@@ -278,6 +284,8 @@ Redis host = redis
 Redis host port = 6379
 
 [https://fuelphp.com/docs/classes/redis.html](https://fuelphp.com/docs/classes/redis.html)
+
+#### Cache
 
 The cache class's defaults are configured through the ```./fuelphp/webapp/fuel/core/config/cache.php``` configuration file.
 
