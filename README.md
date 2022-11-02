@@ -233,7 +233,6 @@ add and/or remove fuelphp site folders and files with any ftp client program in 
 <br />You can also visit `https://example.com` to access website after starting the containers.
 
 Configuration files are stored inside the app/config folder. The application's basic configuration is done in ```./fuelphp/webapp/fuel/app/config/config.php```.
-The loaded configuration can be made environment specific, more on this under Environments.
 
 must add ```'base_url' => 'https://example.com/webapp/public/'``` to ```./fuelphp/webapp/fuel/app/config/config.php``` file to run no error website.
 
