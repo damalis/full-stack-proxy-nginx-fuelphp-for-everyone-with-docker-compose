@@ -232,6 +232,13 @@ docker container restart fuelphp
 add and/or remove fuelphp site folders and files with any ftp client program in ```./fuelphp/webapp``` folder.
 <br />You can also visit `https://example.com` to access website after starting the containers.
 
+Configuration files are stored inside the app/config folder. The application's basic configuration is done in ```./fuelphp/webapp/fuel/app/config/config.php```.
+The loaded configuration can be made environment specific, more on this under Environments.
+
+must add ```'base_url' => 'https://example.com/webapp/public/'``` to ```./fuelphp/webapp/fuel/app/config/config.php``` file to run no error website.
+
+[https://fuelphp.com/docs/general/configuration.html](https://fuelphp.com/docs/general/configuration.html)
+
 #### Proxy
 
 Proxying is typically used to distribute the load among several servers, seamlessly show content from different websites, or pass requests for processing to application servers over protocols other than HTTP.
