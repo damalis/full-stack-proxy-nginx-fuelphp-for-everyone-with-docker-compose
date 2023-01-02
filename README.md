@@ -222,6 +222,12 @@ You should see the "Welcome! You have successfully installed the Fuel PHP Framew
 https://example.com
 ```
 
+Configuration files are stored inside the app/config folder. The application's basic configuration is done in ```./fuelphp/webapp/fuel/app/config/config.php```.
+
+must add ```'base_url' => 'https://example.com/webapp/public/'``` to ```./fuelphp/webapp/fuel/app/config/config.php``` file to run no error website.
+
+[https://fuelphp.com/docs/general/configuration.html](https://fuelphp.com/docs/general/configuration.html)
+
 add or remove code in the ./php-fpm/php/conf.d/security.ini file for custom php.ini configurations
 
 [https://www.php.net/manual/en/configuration.file.php](https://www.php.net/manual/en/configuration.file.php)
@@ -236,12 +242,6 @@ docker container restart fuelphp
 
 add and/or remove fuelphp site folders and files with any ftp client program in ```./fuelphp/webapp``` folder.
 <br />You can also visit `https://example.com` to access website after starting the containers.
-
-Configuration files are stored inside the app/config folder. The application's basic configuration is done in ```./fuelphp/webapp/fuel/app/config/config.php```.
-
-must add ```'base_url' => 'https://example.com/webapp/public/'``` to ```./fuelphp/webapp/fuel/app/config/config.php``` file to run no error website.
-
-[https://fuelphp.com/docs/general/configuration.html](https://fuelphp.com/docs/general/configuration.html)
 
 #### Proxy
 
