@@ -60,8 +60,11 @@ server {
 		proxy_set_header Proxy "";        
 	}
 	#
-	location ~ /.well-known {
-		allow all;
+	# deny access to .htaccess vb. files, if Apache's document root
+	#
+	location ~/\. {
+		deny all;     
+		log_not_found off;
 	}
 	#
 	location = /favicon.ico {
