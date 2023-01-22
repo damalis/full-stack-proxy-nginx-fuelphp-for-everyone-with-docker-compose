@@ -17,6 +17,9 @@ services:
             - type: bind
               source: ./php-fpm/php-fpm.d/z-www.conf
               target: '${PHP_INI_DIR_PREFIX}/php-fpm.d/z-www.conf'
+            - type: bind
+              source: ./packagecheck.sh
+              target: '/tmp/packagecheck.sh'
         hostname: fuelphp
         restart: unless-stopped
         ports:
@@ -35,7 +38,7 @@ services:
         labels:            
             - 'docker-volume-backup.stop-during-backup=true'
         command: > 
-            bash -c "apt-get -y update && apt-get install -y zip unzip libicu-dev && docker-php-ext-install mysqli intl; curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer && 
+            bash -c "apt-get -y update && sh /tmp/packagecheck.sh 'zip unzip' && curl -sSL https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions -o - | sh -s intl mysqli && curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer && 
             if [ -f \"${WEBSERVER_DOC_ROOT}/webapp/oil\" ]; then composer update --working-dir=${WEBSERVER_DOC_ROOT}/webapp; else composer create-project fuel/fuel webapp --prefer-dist --no-install && composer config --working-dir=${WEBSERVER_DOC_ROOT}/webapp allow-plugins.composer/installers true && composer install --working-dir=${WEBSERVER_DOC_ROOT}/webapp && cd ${WEBSERVER_DOC_ROOT}/webapp && php oil refine install; fi; 
             grep -qe 'date.timezone = ${LOCAL_TIMEZONE}' ${PHP_INI_DIR_PREFIX}/php/conf.d/security.ini || echo 'date.timezone = ${LOCAL_TIMEZONE}' >> ${PHP_INI_DIR_PREFIX}/php/conf.d/security.ini; php-fpm"
 
